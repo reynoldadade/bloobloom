@@ -1,0 +1,84 @@
+body {
+  padding: 0;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.bloobloom {
+  &__menu {
+    z-index: 10;
+    height: calc(100vh - 50px);
+    width: calc(100% / 3);
+    border-style: solid;
+    border-width: 0px 1px 0px 0px;
+    border-color: black;
+    position: fixed;
+    overflow-x: hidden;
+    top: 50px;
+    z-index: 10010;
+    transition: all 0.4s ease;
+    ul {
+      list-style: none;
+    }
+    left: calc(-100% / 3);
+
+    &__open {
+      left: 0;
+    }
+    &__tab {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      height: 60px;
+      border-bottom: 1px solid #000;
+      cursor: pointer;
+      color: #000;
+      &:hover {
+        color: white;
+        background-color: #000;
+      }
+    }
+
+    &__title {
+      font-family: "Acumin Pro";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 19px;
+      display: flex;
+      align-items: center;
+      letter-spacing: 1px;
+      margin-left: 18px;
+    }
+    &__icon {
+      margin-right: 18px;
+    }
+  }
+
+  &__container {
+    position: relative;
+  }
+
+  &__header {
+    height: 50px;
+    border-bottom: solid 1px black;
+    width: 100%;
+    &__button {
+      width: 160px;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 14px;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+
+      &__opened {
+        text-decoration: underline;
+      }
+    }
+  }
+}
