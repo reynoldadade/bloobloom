@@ -167,6 +167,53 @@ export const useCollectionsStore = defineStore("collections", () => {
       totalCountOfGlasses.value = 0;
     }
   }
+  // action to add to filters_glass_variant_frame_variant_colour_tag_configuration_names array
+  function addColorFilter(payload: string) {
+    filters_glass_variant_frame_variant_colour_tag_configuration_names.value = [
+      ...filters_glass_variant_frame_variant_colour_tag_configuration_names.value,
+      payload,
+    ];
+  }
 
-  return { glasses, totalCountOfGlasses, getGlasses };
+  // action to remove a color from filters_glass_variant_frame_variant_colour_tag_configuration_names list
+  function removeColorFilter(payload: string) {
+    // any color that is sent to this function will be remove if it matches an item in the array
+    filters_glass_variant_frame_variant_colour_tag_configuration_names.value =
+      filters_glass_variant_frame_variant_colour_tag_configuration_names.value.filter(
+        (color) => color !== payload
+      );
+  }
+
+  // action to add a frame to list of selected frame
+  function addFrameFilter(payload: string) {
+    filters_glass_variant_frame_variant_frame_tag_configuration_names.value = [
+      ...filters_glass_variant_frame_variant_frame_tag_configuration_names.value,
+      payload,
+    ];
+  }
+
+  // action to remove a frame from filters_glass_variant_frame_variant_frame_tag_configuration_names list
+  function removeFrameFilter(payload: string) {
+    // any frame sent to this function will be removed from the list
+    filters_glass_variant_frame_variant_frame_tag_configuration_names.value =
+      filters_glass_variant_frame_variant_frame_tag_configuration_names.value.filter(
+        (frame) => frame !== payload
+      );
+  }
+
+  // action to increase page number
+  function increasePageNumber() {
+    pageNumber.value = +1;
+  }
+
+  return {
+    glasses,
+    totalCountOfGlasses,
+    getGlasses,
+    removeFrameFilter,
+    addFrameFilter,
+    removeColorFilter,
+    addColorFilter,
+    increasePageNumber,
+  };
 });
