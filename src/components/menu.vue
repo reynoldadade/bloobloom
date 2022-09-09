@@ -88,7 +88,9 @@ function openSubMenu(categories: Category[]) {
   // set the categories from the collections
   selectedCategories.value = categories;
   // set the submenu to open with true
-  store.openOrCloseSubMenu(true);
+  if (categories.length > 0) {
+    store.openOrCloseSubMenu(true);
+  }
 }
 
 // close the menu with a slight delay
