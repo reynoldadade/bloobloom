@@ -85,8 +85,9 @@ onMounted(async () => {
 });
 
 function openSubMenu(categories: Category[]) {
-  // set the categories
+  // set the categories from the collections
   selectedCategories.value = categories;
+  // set the submenu to open with true
   store.openOrCloseSubMenu(true);
 }
 
