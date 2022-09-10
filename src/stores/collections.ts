@@ -6,9 +6,13 @@ import { GET_glasses } from "../services/api";
 export const useCollectionsStore = defineStore("collections", () => {
   // will hold glasses array
   const glasses: Ref<Glass[]> = ref([]);
+  // getter for glasses
+  const getGlasses: ComputedRef<Glass[]> = computed(() => glasses.value);
   const totalCountOfGlasses: Ref<number> = ref(0);
   // page number of the current page
   const pageNumber: Ref<number> = ref(1);
+  // name of the current collection
+  const collectionName: Ref<string | string[]> = ref("spectacles-women");
   // color of glasses selected in filter
   const filters_glass_variant_frame_variant_colour_tag_configuration_names: Ref<
     string[]
@@ -56,8 +60,7 @@ export const useCollectionsStore = defineStore("collections", () => {
     // when the mapping is done convert to string
     return urlString.join("");
   });
-  // name of the current collection
-  const collectionName: Ref<string> = ref("spectacles-women");
+
   // type of sort
   const sortType = "collection_relations_position";
   // order of the sort
@@ -100,7 +103,7 @@ export const useCollectionsStore = defineStore("collections", () => {
   // for the final url i need to construct it with the pieces of all the params i have
 
   const glassesRequestURL = computed(() => {
-    return `${collectionName.value}/glasses/?sort[type]=${sortType}&sort[order]=${sortOrder}&page[limit]=${pageLimit}&page[number]=${pageNumber.value}&filters[filter_frame_variant_home_trial_available]=${filter_frame_variant_home_trial_available}${colorConfigurationParamString.value}${frameConfigurationParamString.value}${lensVariantPrescriptionParamString.value}${lensVariantTypesParamString}`;
+    return `${collectionName.value}/glasses/?sort[type]=${sortType}&sort[order]=${sortOrder}&page[limit]=${pageLimit}&page[number]=${pageNumber.value}&filters[filter_frame_variant_home_trial_available]=${filter_frame_variant_home_trial_available}${colorConfigurationParamString.value}${frameConfigurationParamString.value}${lensVariantPrescriptionParamString.value}${lensVariantTypesParamString.value}`;
   });
 
   // watch page number
@@ -127,7 +130,7 @@ export const useCollectionsStore = defineStore("collections", () => {
     async (newVal, oldVal) => {
       if (newVal !== oldVal) {
         pageNumber.value = 1;
-        await getGlasses();
+        await getGlassesApi();
       }
     }
   );
@@ -139,7 +142,7 @@ export const useCollectionsStore = defineStore("collections", () => {
       // we need to reset page number because we might miss out of the first page if the page number is higher than 1
       if (newVal !== oldVal) {
         pageNumber.value = 1;
-        await getGlasses();
+        await getGlassesApi();
       }
     }
   );
@@ -149,13 +152,13 @@ export const useCollectionsStore = defineStore("collections", () => {
     async (newVal, oldVal) => {
       if (oldVal !== newVal) {
         pageNumber.value = 1;
-        await getGlasses();
+        await getGlassesApi();
       }
     }
   );
 
   // action to request glasses
-  async function getGlasses() {
+  async function getGlassesApi() {
     const response: GlassesResponse | null = await GET_glasses(
       glassesRequestURL.value
     );
@@ -206,14 +209,21 @@ export const useCollectionsStore = defineStore("collections", () => {
     pageNumber.value = +1;
   }
 
+  // action to set collectionName
+  function setCollectionName(payload: string | string[]) {
+    collectionName.value = payload;
+  }
+
   return {
     glasses,
     totalCountOfGlasses,
     getGlasses,
+    getGlassesApi,
     removeFrameFilter,
     addFrameFilter,
     removeColorFilter,
     addColorFilter,
     increasePageNumber,
+    setCollectionName,
   };
 });

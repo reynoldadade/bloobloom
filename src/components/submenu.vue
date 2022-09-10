@@ -4,11 +4,11 @@
     :class="store.getSubMenuState ? 'bloobloom__menu__open' : ''"
     @mouseleave="store.openOrCloseSubMenu(false)"
   >
-    <div
+    <router-link
       v-for="category in categories"
       :key="category.name"
       class="bloobloom__menu__tab"
-      @click="openSubMenu()"
+      :to="{ name: 'collections', params: { url: category.url } }"
     >
       <span class="bloobloom__menu__title"> {{ category.name }}</span>
       <span>
@@ -27,7 +27,7 @@
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
       </span>
-    </div>
+    </router-link>
   </div>
 </template>
 
@@ -46,8 +46,6 @@ const props = defineProps<{
 onMounted(async () => {
   //   await store.getCollectionsMenu();
 });
-
-function openSubMenu() {}
 
 // close the menu with a slight delay
 </script>
