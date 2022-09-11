@@ -61,6 +61,26 @@ export const useCollectionsStore = defineStore("collections", () => {
     return urlString.join("");
   });
 
+  const numberOfFilters: ComputedRef<number> = computed(() => {
+    return (
+      filters_glass_variant_frame_variant_colour_tag_configuration_names.value
+        .length +
+      filters_glass_variant_frame_variant_colour_tag_configuration_names.value
+        .length
+    );
+  });
+
+  // get the array of filters_glass_variant_frame_variant_colour_tag_configuration_names
+  const selectedColorFilters: ComputedRef<string[]> = computed(
+    () =>
+      filters_glass_variant_frame_variant_colour_tag_configuration_names.value
+  );
+
+  // get the array of filters_glass_variant_frame_variant_frame_tag_configuration_names
+  const selectedFrameFilters: ComputedRef<string[]> = computed(() => {
+    return filters_glass_variant_frame_variant_frame_tag_configuration_names.value;
+  });
+
   // type of sort
   const sortType = "collection_relations_position";
   // order of the sort
@@ -172,6 +192,17 @@ export const useCollectionsStore = defineStore("collections", () => {
   }
   // action to add to filters_glass_variant_frame_variant_colour_tag_configuration_names array
   function addColorFilter(payload: string) {
+    // find if the item exists in color array
+    const result =
+      filters_glass_variant_frame_variant_colour_tag_configuration_names.value.includes(
+        payload
+      );
+
+    if (result) {
+      // if item exists we need to filter it out
+      return removeColorFilter(payload);
+    }
+    // if it does exists then we can add to the array
     filters_glass_variant_frame_variant_colour_tag_configuration_names.value = [
       ...filters_glass_variant_frame_variant_colour_tag_configuration_names.value,
       payload,
@@ -189,6 +220,17 @@ export const useCollectionsStore = defineStore("collections", () => {
 
   // action to add a frame to list of selected frame
   function addFrameFilter(payload: string) {
+    // check if this item exists
+    const result: boolean =
+      filters_glass_variant_frame_variant_frame_tag_configuration_names.value.includes(
+        payload
+      );
+    if (result) {
+      return removeFrameFilter(payload);
+    }
+
+    // if a result is true we need to remove it from the list
+
     filters_glass_variant_frame_variant_frame_tag_configuration_names.value = [
       ...filters_glass_variant_frame_variant_frame_tag_configuration_names.value,
       payload,
@@ -225,5 +267,8 @@ export const useCollectionsStore = defineStore("collections", () => {
     addColorFilter,
     increasePageNumber,
     setCollectionName,
+    numberOfFilters,
+    selectedColorFilters,
+    selectedFrameFilters,
   };
 });

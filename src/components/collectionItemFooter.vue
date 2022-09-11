@@ -3,9 +3,9 @@
     <div class="footer__color__buttons">
       <CollectionFooterColorButton
         :glass-variant="glassVariant"
-        v-for="glassVariant in glassVariants"
+        v-for="(glassVariant, index) in glassVariants"
         :key="glassVariant.id + itemId"
-        @select-images="selectImages"
+        @click="selectImageIndex(index)"
       />
     </div>
   </div>
@@ -21,11 +21,11 @@ const prop = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (event: "selectImage", images: Media[]): void;
+  (event: "selectImageIndex", imageIndex: number): void;
 }>();
 
-function selectImages(event: Media[]) {
-  emit("selectImage", event);
+function selectImageIndex(event: number) {
+  emit("selectImageIndex", event);
 }
 </script>
 

@@ -3,7 +3,7 @@ const routes = [
   {
     path: "/collections/:url",
     component: HomeView,
-    alias: "/collections/spectacles-women",
+    alias: "/:url",
     name: "collections",
   },
   {
