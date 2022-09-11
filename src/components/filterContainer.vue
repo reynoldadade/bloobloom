@@ -30,9 +30,11 @@ const shapes: Ref<string[]> = ref(["square", "rectangle", "round", "cat-eye"]);
 <template>
   <div class="bloobloom__filters__container">
     <div class="bloobloom__filters__container__header">
-      <div></div>
+      <div class="bloobloom__filters__container__header__hto">
+        trail available
+      </div>
       <div class="bloobloom__filters__container__header__collectionname">
-        {{ currentCollection }}
+        <span> {{ currentCollection }}</span>
       </div>
       <div class="bloobloom__filters__container__header__filterbox">
         <div class="filter__search__div">
@@ -139,7 +141,7 @@ const shapes: Ref<string[]> = ref(["square", "rectangle", "round", "cat-eye"]);
         </div>
       </div>
       <div class="footer__filters__results">
-        <span> {{ store.totalCountOfGlasses }} results found</span>
+        {{ store.totalCountOfGlasses }} results found
       </div>
       <div class="footer__filters__end">
         <div
