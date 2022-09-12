@@ -9,7 +9,9 @@ const appStore = useAppStore();
 // get router
 const route = useRoute();
 const currentCollection = computed(() => {
-  return route.params.url ? route.params.url.split("-").join(" ") : "";
+  return route.params.url
+    ? (route.params.url as string).split("-").join(" ")
+    : "";
 });
 
 const filterOpen: Ref<boolean> = ref(false);
