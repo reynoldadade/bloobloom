@@ -116,6 +116,7 @@ const shapes: Ref<string[]> = ref(["square", "rectangle", "round", "cat-eye"]);
             class="filter__tag"
             v-for="selectedColor in store.selectedColorFilters"
             :key="selectedColor"
+            @click="store.removeColorFilter(selectedColor)"
           >
             <span>{{ selectedColor }}</span>
             <svg width="10" height="11" viewBox="0 0 10 11" fill="none">
@@ -129,6 +130,7 @@ const shapes: Ref<string[]> = ref(["square", "rectangle", "round", "cat-eye"]);
             class="filter__tag"
             v-for="selectedShape in store.selectedFrameFilters"
             :key="selectedShape"
+            @click="store.removeFrameFilter(selectedShape)"
           >
             <span>{{ selectedShape }}</span>
             <svg width="10" height="11" viewBox="0 0 10 11" fill="none">

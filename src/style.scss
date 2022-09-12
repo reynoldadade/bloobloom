@@ -97,7 +97,6 @@ body {
     width: 100%;
     z-index: 20;
     &__button {
-      width: 160px;
       font-style: normal;
       font-weight: 400;
       font-size: 12px;
@@ -106,7 +105,11 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
+      width: 20%;
       height: 100%;
+      @media (min-width: $--laptop) {
+        width: 160px;
+      }
 
       &__opened {
         text-decoration: underline;
@@ -495,6 +498,167 @@ body {
             background-size: cover;
           }
         }
+      }
+    }
+  }
+}
+
+.filter__container__mobile {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: $--backgroundColor;
+  z-index: 10010;
+  border: $--borderWidth $--borderStyle;
+  transition: opacity 0.15s ease 0s;
+
+  .screen__main__header {
+    height: 50px;
+    position: relative;
+    width: 100%;
+    justify-content: center;
+    padding: 0 30px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    border-bottom: $--borderWidth $--borderStyle $--secondary;
+
+    .close__button {
+      cursor: pointer;
+      position: absolute;
+      right: 24px;
+    }
+  }
+
+  .screen__main__filters__small {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+
+    .filter__panel {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      border-bottom: $--borderWidth $--borderStyle $--secondary;
+
+      .filter__panel__title {
+        cursor: pointer;
+        width: 100%;
+        height: 50px;
+        padding: 0 22px;
+        justify-content: space-between;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 16px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.02em;
+      }
+      .filter__panel__holder {
+        width: 100%;
+        overflow: hidden;
+        max-height: 0;
+        justify-content: space-evenly;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 15px;
+        line-height: 18px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        text-transform: capitalize;
+        transition: all 0.2s ease;
+
+        &.filter__panel__holder__open {
+          max-height: 110px;
+        }
+
+        &.filter__panel__holder__close {
+          max-height: 0px;
+        }
+
+        .filter__holder {
+          display: flex;
+          width: 100%;
+          justify-content: flex-start;
+          align-items: flex-start;
+          padding: 0 22px;
+          height: 50px;
+          flex-wrap: wrap;
+
+          .filter__div {
+            margin-right: 20px;
+          }
+        }
+      }
+    }
+  }
+  .screen__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    border-top: 1px solid #000;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 18px;
+    text-align: center;
+
+    @mixin screen_buttons {
+      cursor: pointer;
+      display: flex;
+      width: 50%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .clear__button {
+      border-right: $--borderWidth $--borderStyle $--secondary;
+      @include screen_buttons;
+    }
+
+    .done__button {
+      @include screen_buttons;
+    }
+  }
+  .footer__filters__list {
+    display: flex;
+    width: 100%;
+    padding: 22px;
+    overflow: hidden;
+    flex-wrap: wrap;
+
+    .filter__tag {
+      display: flex;
+      height: 50px;
+      align-items: center;
+      justify-content: center;
+      margin-right: 18px;
+      span {
+        font-weight: 300;
+        font-size: 13px;
+        line-height: 16px;
+        display: flex;
+        align-items: center;
+        margin-right: 9px;
+      }
+      svg {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        cursor: pointer;
       }
     }
   }
