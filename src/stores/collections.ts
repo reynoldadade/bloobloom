@@ -6,6 +6,7 @@ import { GET_glasses } from "../services/api";
 export const useCollectionsStore = defineStore("collections", () => {
   // will hold glasses array
   const glasses: Ref<Glass[]> = ref([]);
+  const loader: Ref<boolean> = ref(false);
   // getter for glasses
   const getGlasses: ComputedRef<Glass[]> = computed(() => glasses.value);
   const totalCountOfGlasses: Ref<number> = ref(0);
@@ -138,6 +139,7 @@ export const useCollectionsStore = defineStore("collections", () => {
     () => pageNumber.value,
     async (newVal, oldVal) => {
       if (newVal > oldVal) {
+        loader.value = true;
         // since it the page number that changed we need to append to current
         const response: GlassesResponse | null = await GET_glasses(
           glassesRequestURL.value
@@ -146,6 +148,7 @@ export const useCollectionsStore = defineStore("collections", () => {
           // we need to append the new data to the older one
           glasses.value = [...glasses.value, ...response.glasses];
         }
+        loader.value = false;
       }
     }
   );
@@ -255,13 +258,16 @@ export const useCollectionsStore = defineStore("collections", () => {
 
   // action to increase page number
   function increasePageNumber() {
-    pageNumber.value = +1;
+    pageNumber.value = pageNumber.value + 1;
   }
 
   // action to set collectionName
   function setCollectionName(payload: string | string[]) {
     collectionName.value = payload;
   }
+
+  // getter for loader
+  const getLoaderState = computed(() => loader.value);
 
   return {
     glasses,
@@ -278,5 +284,6 @@ export const useCollectionsStore = defineStore("collections", () => {
     selectedColorFilters,
     selectedFrameFilters,
     clearAllFilters,
+    getLoaderState,
   };
 });

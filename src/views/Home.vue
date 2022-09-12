@@ -1,10 +1,13 @@
 <template>
-  <div class="bloobloom__collection">
-    <CollectionItem
-      v-for="item in store.getGlasses"
-      :item="item"
-      :key="item.id"
-    />
+  <div>
+    <div class="bloobloom__collection">
+      <CollectionItem
+        v-for="item in store.getGlasses"
+        :item="item"
+        :key="item.id"
+      />
+    </div>
+    <Loader v-if="store.getLoaderState" />
   </div>
 </template>
 
@@ -13,6 +16,7 @@ import { watch, onMounted } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { useCollectionsStore } from "../stores/collections";
 import CollectionItem from "../components/collectionItem.vue";
+import Loader from "../components/loader.vue";
 const store = useCollectionsStore();
 const route = useRoute();
 
