@@ -77,8 +77,15 @@ const shapes: Ref<string[]> = ref(["square", "rectangle", "round", "cat-eye"]);
       </div>
     </div>
     <div class="screen__buttons">
-      <div class="clear__button">clear all</div>
-      <div class="done__button">done</div>
+      <div class="clear__button" @click="store.clearAllFilters()">
+        clear all
+      </div>
+      <div
+        class="done__button"
+        @click="appStore.openOrCloseMobileFilterContainer(false)"
+      >
+        done
+      </div>
     </div>
   </div>
 </template>

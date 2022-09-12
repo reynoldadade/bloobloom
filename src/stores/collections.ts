@@ -277,5 +277,6 @@ export const useCollectionsStore = defineStore("collections", () => {
     numberOfFilters,
     selectedColorFilters,
     selectedFrameFilters,
+    clearAllFilters,
   };
 });
