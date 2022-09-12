@@ -2,8 +2,10 @@ import { defineStore } from "pinia";
 import { Ref, ref, computed, ComputedRef, watch } from "vue";
 import { Glass, GlassesResponse } from "../models/glasses.model";
 import { GET_glasses } from "../services/api";
+import { useRouter } from "vue-router";
 
 export const useCollectionsStore = defineStore("collections", () => {
+  const router = useRouter();
   // will hold glasses array
   const glasses: Ref<Glass[]> = ref([]);
   const loader: Ref<boolean> = ref(false);
@@ -66,7 +68,7 @@ export const useCollectionsStore = defineStore("collections", () => {
     return (
       filters_glass_variant_frame_variant_colour_tag_configuration_names.value
         .length +
-      filters_glass_variant_frame_variant_colour_tag_configuration_names.value
+      filters_glass_variant_frame_variant_frame_tag_configuration_names.value
         .length
     );
   });
@@ -161,6 +163,14 @@ export const useCollectionsStore = defineStore("collections", () => {
       if (newVal !== oldVal) {
         pageNumber.value = 1;
         await getGlassesApi();
+        // add to route
+        router.push({
+          name: "collections",
+          query: {
+            shape: selectedFrameFilters.value.join("~"),
+            colour: newVal.join("~"),
+          },
+        });
       }
     }
   );
@@ -173,6 +183,14 @@ export const useCollectionsStore = defineStore("collections", () => {
       if (newVal !== oldVal) {
         pageNumber.value = 1;
         await getGlassesApi();
+        // add to route
+        router.push({
+          name: "collections",
+          query: {
+            shape: newVal.join("~"),
+            colour: selectedColorFilters.value.join("~"),
+          },
+        });
       }
     }
   );
@@ -293,5 +311,7 @@ export const useCollectionsStore = defineStore("collections", () => {
     selectedFrameFilters,
     clearAllFilters,
     getLoaderState,
+    filters_glass_variant_frame_variant_colour_tag_configuration_names,
+    filters_glass_variant_frame_variant_frame_tag_configuration_names,
   };
 });

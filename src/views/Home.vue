@@ -23,8 +23,32 @@ const route = useRoute();
 // call the default configuration on mounted
 onMounted(async () => {
   // call api on initial load
+  //check if queries exist
+  pushQueries();
   await store.getGlassesApi();
 });
+
+// used to check if route queries are available and then update store
+function pushQueries() {
+  if (route.query.shape) {
+    (route.query.shape as string)
+      .split("~")
+      .map((shape) =>
+        store.filters_glass_variant_frame_variant_frame_tag_configuration_names.push(
+          shape
+        )
+      );
+  }
+  if (route.query.colour) {
+    (route.query.colour as string)
+      .split("~")
+      .map((colour) =>
+        store.filters_glass_variant_frame_variant_colour_tag_configuration_names.push(
+          colour
+        )
+      );
+  }
+}
 
 // watch for changes in the router
 watch(
