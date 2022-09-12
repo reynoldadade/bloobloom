@@ -2,8 +2,10 @@
 import { useCollectionsStore } from "../stores/collections";
 import { useRoute } from "vue-router";
 import { computed, Ref, ref } from "@vue/runtime-core";
+import { useAppStore } from "../stores";
 // instantiate your store
 const store = useCollectionsStore();
+const appStore = useAppStore();
 // get router
 const route = useRoute();
 const currentCollection = computed(() => {
@@ -37,9 +39,50 @@ const shapes: Ref<string[]> = ref(["square", "rectangle", "round", "cat-eye"]);
         <span> {{ currentCollection }}</span>
       </div>
       <div class="bloobloom__filters__container__header__filterbox">
-        <div class="filter__search__div">
+        <div
+          class="filter__search__div desktop__only"
+          @click="openFilter"
+          key="desktop"
+        >
           <span class="filter__div__title">filters</span>
-          <div class="filter__div__button" @click="openFilter">
+          <div class="filter__div__button">
+            <div
+              class="filter__div__counter"
+              v-if="store.numberOfFilters !== 0"
+            >
+              {{ store.numberOfFilters }}
+            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-sliders"
+            >
+              <line x1="4" y1="21" x2="4" y2="14"></line>
+              <line x1="4" y1="10" x2="4" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12" y2="3"></line>
+              <line x1="20" y1="21" x2="20" y2="16"></line>
+              <line x1="20" y1="12" x2="20" y2="3"></line>
+              <line x1="1" y1="14" x2="7" y2="14"></line>
+              <line x1="9" y1="8" x2="15" y2="8"></line>
+              <line x1="17" y1="16" x2="23" y2="16"></line>
+            </svg>
+          </div>
+        </div>
+        <div
+          class="filter__search__div mobile__only"
+          key="mobile"
+          @click="appStore.openOrCloseMobileFilterContainer(true)"
+        >
+          <span class="filter__div__title">filters</span>
+          <div class="filter__div__button">
             <div
               class="filter__div__counter"
               v-if="store.numberOfFilters !== 0"

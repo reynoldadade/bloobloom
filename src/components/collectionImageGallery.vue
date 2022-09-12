@@ -1,6 +1,10 @@
 <template>
   <div class="image__gallery">
-    <div class="image__gallery__button__left" role="button"></div>
+    <div
+      class="image__gallery__button__left"
+      role="button"
+      @click="moveToPreviousImage"
+    ></div>
     <div
       class="image__gallery__button__right"
       role="button"
@@ -38,7 +42,7 @@ const imageLength: ComputedRef<number> = computed(() => {
 function moveToNextImage() {
   if (imageIndex.value < imageLength.value - 1) {
     // increase the index if its less than the length -1
-    imageIndex.value = +1;
+    imageIndex.value = imageIndex.value + 1;
   } else {
     // else we have reached the end and move on to the first picture
     imageIndex.value = 0;
@@ -48,7 +52,7 @@ function moveToNextImage() {
 function moveToPreviousImage() {
   if (imageIndex.value > 0) {
     // increase the index if its less than the length -1
-    imageIndex.value = -1;
+    imageIndex.value = imageIndex.value - 1;
   } else {
     // else we have reached the end and move on to the first picture
     imageIndex.value = imageLength.value - 1;

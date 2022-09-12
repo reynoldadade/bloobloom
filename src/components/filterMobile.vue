@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { Ref, ref } from "vue";
+import { useAppStore } from "../stores";
 import { useCollectionsStore } from "../stores/collections";
 import FilterPanelMobile from "./filterPanelMobile.vue";
 
 const store = useCollectionsStore();
+const appStore = useAppStore();
 const colors: Ref<string[]> = ref([
   "black",
   "tortoise",
@@ -20,7 +22,10 @@ const shapes: Ref<string[]> = ref(["square", "rectangle", "round", "cat-eye"]);
   <div class="filter__container__mobile">
     <div class="screen__main__header">
       <span>Filters</span>
-      <div class="close__button">
+      <div
+        class="close__button"
+        @click="appStore.openOrCloseMobileFilterContainer(false)"
+      >
         <svg width="12" height="13" viewBox="0 0 12 13" fill="none">
           <path
             d="M6.86094 6.00005L11.3159 1.14005C11.4161 1.01252 11.4684 0.848467 11.4624 0.680683C11.4565 0.512899 11.3927 0.35374 11.2839 0.23501C11.1751 0.11628 11.0292 0.0467252 10.8754 0.0402444C10.7216 0.0337637 10.5712 0.0908347 10.4543 0.200052L5.99928 5.06005L1.54428 0.193385C1.42737 0.0841679 1.27699 0.0270975 1.12319 0.0335782C0.969388 0.040059 0.823492 0.109614 0.714657 0.228343C0.605821 0.347073 0.542062 0.506232 0.536122 0.674016C0.530181 0.8418 0.582496 1.00585 0.682612 1.13339L5.13761 6.00005L0.676501 10.8601C0.612529 10.9198 0.560572 10.9934 0.523891 11.0761C0.48721 11.1588 0.466597 11.2489 0.463346 11.3407C0.460095 11.4325 0.474277 11.5241 0.505 11.6096C0.535723 11.6952 0.582326 11.7729 0.641881 11.8378C0.701437 11.9028 0.77266 11.9536 0.851081 11.9871C0.929502 12.0207 1.01343 12.0361 1.09759 12.0326C1.18175 12.029 1.26433 12.0066 1.34015 11.9665C1.41597 11.9265 1.48338 11.8698 1.53817 11.8001L5.99928 6.94005L10.4543 11.8001C10.5712 11.9093 10.7216 11.9663 10.8754 11.9599C11.0292 11.9534 11.1751 11.8838 11.2839 11.7651C11.3927 11.6464 11.4565 11.4872 11.4624 11.3194C11.4684 11.1516 11.4161 10.9876 11.3159 10.8601L6.86094 6.00005Z"

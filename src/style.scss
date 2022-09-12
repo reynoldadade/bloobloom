@@ -31,6 +31,19 @@ body {
   text-transform: uppercase;
 }
 
+.desktop__only {
+  display: none !important;
+  @media (min-width: $--laptop) {
+    display: flex !important;
+  }
+}
+.mobile__only {
+  display: none !important;
+  @media (max-width: $--tabletMax) {
+    display: flex !important;
+  }
+}
+
 .bloobloom {
   &__menu {
     background-color: $--backgroundColor;
