@@ -108,7 +108,7 @@ body {
     border-bottom: $--borderStyle $--borderWidth $--secondary;
     width: 100%;
     z-index: 20;
-    &__button {
+    @mixin menuButton {
       font-style: normal;
       font-weight: 400;
       font-size: 12px;
@@ -117,14 +117,25 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 20%;
       height: 100%;
-      @media (min-width: $--laptop) {
-        width: 160px;
+    }
+    &__button {
+      @include menuButton;
+      width: 160px;
+      @media (max-width: $--tabletMax) {
+        display: none !important;
       }
 
       &__opened {
         text-decoration: underline;
+      }
+    }
+
+    &__button__mobile {
+      @include menuButton;
+      width: 20%;
+      @media (min-width: $--laptop) {
+        display: none !important;
       }
     }
   }
