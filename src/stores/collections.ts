@@ -114,6 +114,13 @@ export const useCollectionsStore = defineStore("collections", () => {
     // when the mapping is done convert to string
     return urlString.join("");
   });
+  // remove all current existing filters in search
+  function clearAllFilters() {
+    filters_glass_variant_frame_variant_colour_tag_configuration_names.value =
+      [];
+    filters_glass_variant_frame_variant_frame_tag_configuration_names.value =
+      [];
+  }
 
   // limit of glasses to see at a time
   const pageLimit: number = 12;

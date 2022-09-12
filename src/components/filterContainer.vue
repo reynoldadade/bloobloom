@@ -185,7 +185,7 @@ const shapes: Ref<string[]> = ref(["square", "rectangle", "round", "cat-eye"]);
           </div>
         </div>
       </div>
-      <div class="footer__filters__results">
+      <div class="footer__filters__results" v-if="store.totalCountOfGlasses">
         {{ store.totalCountOfGlasses }} results found
       </div>
       <div class="footer__filters__end">
