@@ -258,6 +258,9 @@ export const useCollectionsStore = defineStore("collections", () => {
 
   // action to increase page number
   function increasePageNumber() {
+    if (glasses.value.length === 0) {
+      return;
+    }
     pageNumber.value = pageNumber.value + 1;
   }
 
