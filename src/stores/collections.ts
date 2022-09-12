@@ -258,7 +258,12 @@ export const useCollectionsStore = defineStore("collections", () => {
 
   // action to increase page number
   function increasePageNumber() {
+    // if there is not data yet there is no need to go to the next page
     if (glasses.value.length === 0) {
+      return;
+    }
+    // if we have all our items we dont need to call api
+    if (glasses.value.length === totalCountOfGlasses.value) {
       return;
     }
     pageNumber.value = pageNumber.value + 1;

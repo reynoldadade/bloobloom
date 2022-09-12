@@ -14,10 +14,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    style="margin: 40px; padding: 40px; width: 100%; height: 200px"
-    class="loader"
-  >
+  <div style="" class="loader loader__container">
     <svg
       v-if="collectionStore.getLoaderState"
       xmlns="http://www.w3.org/2000/svg"
