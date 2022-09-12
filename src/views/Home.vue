@@ -7,7 +7,7 @@
         :key="item.id"
       />
     </div>
-    <Loader v-if="store.getLoaderState" />
+    <Loader />
   </div>
 </template>
 

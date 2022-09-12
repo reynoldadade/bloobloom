@@ -1,5 +1,5 @@
 <template>
-  <div @scroll="loadMore">
+  <div>
     <Nav />
 
     <FilterContainer />
@@ -23,21 +23,6 @@ import { useCollectionsStore } from "./stores/collections";
 
 const store = useAppStore();
 const collectionStore = useCollectionsStore();
-function loadMore(e: any) {
-  if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
-    collectionStore.increasePageNumber();
-  }
-}
-
-onBeforeMount(() => {
-  window.addEventListener("scroll", loadMore, {
-    passive: true,
-  });
-});
-
-onBeforeUnmount(() => {
-  window.removeEventListener("scroll", loadMore);
-});
 </script>
 
 <style scoped>
