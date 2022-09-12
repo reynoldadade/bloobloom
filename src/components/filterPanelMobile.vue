@@ -30,7 +30,6 @@ function emitFilter(filter: string) {
         viewBox="0 0 15 15"
         fill="none"
         v-if="!filterOpen"
-        @click="openFilter"
       >
         <line
           x1="7"

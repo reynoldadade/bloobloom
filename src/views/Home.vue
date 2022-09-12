@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch, onMounted } from "@vue/runtime-core";
+import { watch, onMounted, onBeforeMount } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { useCollectionsStore } from "../stores/collections";
 import CollectionItem from "../components/collectionItem.vue";
@@ -21,7 +21,7 @@ const store = useCollectionsStore();
 const route = useRoute();
 
 // call the default configuration on mounted
-onMounted(async () => {
+onBeforeMount(async () => {
   // call api on initial load
   //check if queries exist
   pushQueries();
