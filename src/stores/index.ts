@@ -8,8 +8,12 @@ export const useAppStore = defineStore("main", () => {
   const menuOpen: Ref<boolean> = ref(false);
   // if submenu is open
   const subMenuOpen: Ref<boolean> = ref(false);
+  // if mobileFilterContainer is open
+  const mobileFilterMenuOpen: Ref<boolean> = ref(false);
   // timeout
   let timeOut: Ref<undefined | number> = ref(undefined);
+  // sub menu timeout
+  let subMenuTimeOut: Ref<undefined | number> = ref(undefined);
   // collections
   const collections: Ref<Collections[]> = ref([]);
 
@@ -29,7 +33,17 @@ export const useAppStore = defineStore("main", () => {
   }
   // when save the state to submenu value
   function openOrCloseSubMenu(state: boolean) {
+    if (!state) {
+      return (subMenuTimeOut.value = setTimeout(
+        () => (subMenuOpen.value = state),
+        500
+      ));
+    }
     subMenuOpen.value = state;
+  }
+  // action used to open or close mobile filter
+  function openOrCloseMobileFilterContainer(state: boolean) {
+    mobileFilterMenuOpen.value = state;
   }
 
   //get menuCollection
@@ -44,6 +58,7 @@ export const useAppStore = defineStore("main", () => {
   const getMenuState = computed(() => menuOpen.value);
   const getCollections = computed(() => collections.value);
   const getSubMenuState = computed(() => subMenuOpen.value);
+  const getMobileFilterMenuOpen = computed(() => mobileFilterMenuOpen.value);
 
   return {
     openOrCloseMenu,
@@ -52,5 +67,7 @@ export const useAppStore = defineStore("main", () => {
     getMenuState,
     getCollections,
     getCollectionsMenu,
+    getMobileFilterMenuOpen,
+    openOrCloseMobileFilterContainer,
   };
 });
