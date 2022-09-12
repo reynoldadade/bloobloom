@@ -207,6 +207,7 @@ export const useCollectionsStore = defineStore("collections", () => {
 
   // action to request glasses
   async function getGlassesApi() {
+    loader.value = true;
     const response: GlassesResponse | null = await GET_glasses(
       glassesRequestURL.value
     );
@@ -217,6 +218,7 @@ export const useCollectionsStore = defineStore("collections", () => {
       glasses.value = [];
       totalCountOfGlasses.value = 0;
     }
+    loader.value = false;
   }
   // action to add to filters_glass_variant_frame_variant_colour_tag_configuration_names array
   function addColorFilter(payload: string) {
