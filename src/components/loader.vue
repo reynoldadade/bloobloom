@@ -15,13 +15,7 @@ onMounted(() => {
 
 <template>
   <div
-    style="
-      margin: 40px;
-      padding: 40px;
-      width: 100%;
-      height: 200px;
-      border: 1px solid red;
-    "
+    style="margin: 40px; padding: 40px; width: 100%; height: 200px"
     class="loader"
   >
     <svg
